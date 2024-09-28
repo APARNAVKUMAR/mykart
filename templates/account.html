@@ -1,0 +1,13 @@
+{% extends 'base.html' %}
+{% block content %}
+    {% include 'account_details.html' %}
+{% if register %}
+<script>
+    register()
+</script>
+{% else %}
+<script>
+    login()
+</script>
+{% endif %}
+{% endblock content %}

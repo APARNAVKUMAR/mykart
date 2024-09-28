@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYKART</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="index.html"><img src="{% static 'images/logo.png' %}" alt="logo" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="product_list">Products</a></li>
+                        {% if not user.is_authenticated %}
+                        <li><a href="account">Account</a></li>
+                        {% else %}
+                        <li><a href="orders">Orders</a></li>
+                        <li><a href="logout">Logout</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% if user.is_authenticated %}
+                <a href="cart"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
+                {% endif %}
+                <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+            </div>
+
+        </div>
+
+  <!-- content start-->
+  {% block content %}
+
+  {% endblock content %}
+  <!-- content end-->
+    {% include 'footer.html' %}
+
+</body>
+</html>

@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MYKART</title>
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+
+<body>
+
+    <div class="header">
+        <div class="container">
+            <div class="navbar">
+                <div class="logo">
+                    <a href="/"><img src="{% static 'images/logo.png' %}" alt="logo" width="125px"></a>
+                </div>
+                <nav>
+                    <ul id="MenuItems">
+                        <li><a href="/">Home</a></li>
+                        <li><a href="product_list">Products</a></li>
+                        {% if not user.is_authenticated %}
+                        <li><a href="account">Account</a></li>
+                        {% else %}
+                        <li><a href="orders">Orders</a></li>
+                        <li><a href="logout">Logout</a></li>
+                        {% endif %}
+                    </ul>
+                </nav>
+                {% if user.is_authenticated %}
+                <a href="cart"><img src="{% static 'images/cart.png' %}" width="30px" height="30px"></a>
+                {% endif %}
+                <img src="{% static 'images/menu.png' %}" class="menu-icon" onclick="menutoggle()">
+            </div>
+
+            <div class="row">
+                <div class="col-2">
+                    <h1>Give Your Workout <br> A New Style!</h1>
+                    <p>Success isn't always about greatness. It;s about consistency. Consistent <br> hard work gains
+                        success. Greatness will come.</p>
+                    <a href="" class="btn">Explore Now &#8594;</a>
+                </div>
+                <div class="col-2">
+                    <img src="{% static 'images/image1.png' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Feadtued Categories -->
+
+    <div class="categories">
+        <div class="small-container">
+            <div class="row">
+                <div class="col-3">
+                    <img src="{% static 'images/category-1.jpg' %}">
+                </div>
+                <div class="col-3">
+                    <img src="{% static 'images/category-2.jpg' %}">
+                </div>
+                <div class="col-3">
+                    <img src="{% static 'images/category-3.jpg' %}">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Featured Products -->
+
+    <div class="small-container">
+        <h2 class="title">Featured Products</h2>
+        <div class="row">
+            {% for product in featured_products %}
+            <div class="col-4">
+                <a href="'product_details' product.id "><img src="{{ product.image.url }}"></a>
+                <h4>{{ product.title }}</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>{{ product.price }}</p>
+            </div>
+            {% endfor %}
+        </div>
+        <h2 class="title">Latest Products</h2>
+        <div class="row">
+            {% for product in latest_products %}
+            <div class="col-4">
+                <img src="{{ product.image.url }}">
+                <h4>{{ product.title }}</h4>
+                <div class="rating">
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star"></i>
+                    <i class="fa fa-star-o"></i>
+                </div>
+                <p>{{ product.price }}</p>
+            </div>
+             {% endfor %}
+        </div>
+    </div>
+
+    <!-- Offer -->
+
+    <!-- Footer -->
+
+    <!-- javascript -->
+
+    <script>
+        var MenuItems = document.getElementById("MenuItems");
+        MenuItems.style.maxHeight = "0px";
+        function menutoggle() {
+            if (MenuItems.style.maxHeight == "0px") {
+                MenuItems.style.maxHeight = "200px"
+            }
+            else {
+                MenuItems.style.maxHeight = "0px"
+            }
+        }
+    </script>
+</body>
+</html>
